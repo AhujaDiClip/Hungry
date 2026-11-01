@@ -15,7 +15,7 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Tailwind CSS (with configuration for unified theming) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -52,7 +52,7 @@
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-        /* De-cluttered Ambient 3D Canvas */
+        /* Ambient 3D Canvas */
         #thp-3d-canvas {
             position: fixed;
             top: 0;
@@ -61,10 +61,10 @@
             height: 100vh;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.6; /* Softened presence */
+            opacity: 0.6; 
         }
 
-        /* Psychological UI Tokens - The "Bitter & Sweet" Contrast */
+        /* Glass Tokens */
         .glass-panel {
             background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(20px);
@@ -75,7 +75,7 @@
 
         .glass-panel:hover {
             background: rgba(15, 23, 42, 0.8);
-            border-color: rgba(252, 211, 77, 0.3); /* Sweet Amber Glow */
+            border-color: rgba(252, 211, 77, 0.3);
             transform: translateY(-4px);
             box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(252, 211, 77, 0.1);
         }
@@ -89,10 +89,27 @@
         
         .glass-panel-light:hover {
             transform: translateY(-4px);
-            box-shadow: 0 25px 50px -12px rgba(45, 212, 191, 0.15); /* Fresh Mint Glow */
+            box-shadow: 0 25px 50px -12px rgba(45, 212, 191, 0.15); 
         }
 
-        /* Refined Interactions */
+        /* Modal Specific Animations */
+        #recipe-modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #recipe-modal.hidden-modal {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #modal-content {
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: translateY(20px) scale(0.95);
+        }
+        #recipe-modal:not(.hidden-modal) #modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        /* Buttons */
         .btn-gourmet {
             position: relative;
             overflow: hidden;
@@ -108,28 +125,24 @@
         .btn-gourmet:hover::after { left: 100%; }
         .btn-gourmet:hover { transform: translateY(-2px) scale(1.02); }
 
-        /* Subtle Animations */
+        /* Animations */
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-8px); }
         }
         .animate-float { animation: float 5s ease-in-out infinite; }
 
-        /* Tab Views */
         .tab-view {
             display: none;
             opacity: 0;
             animation: fadeIn 0.5s ease-in-out forwards;
         }
-        .tab-view.active {
-            display: block;
-        }
+        .tab-view.active { display: block; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Sticky Header */
         .sticky-header {
             position: fixed;
             top: 0; width: 100%;
@@ -140,11 +153,10 @@
             transition: all 0.3s ease;
         }
 
-        /* Softer Custom Cursor */
         #cursor-ring {
             position: fixed;
             width: 36px; height: 36px;
-            border: 1px solid rgba(252, 211, 77, 0.6); /* Amber ring */
+            border: 1px solid rgba(252, 211, 77, 0.6); 
             border-radius: 50%;
             pointer-events: none;
             transform: translate(-50%, -50%);
@@ -162,7 +174,7 @@
     <!-- Interactive Cursor -->
     <div id="cursor-ring"></div>
 
-    <!-- Main Content Wrapper (Elevated above canvas) -->
+    <!-- Main Content Wrapper -->
     <div class="relative z-10 w-full">
 
         <!-- Global Sticky Navigation Bar -->
@@ -181,19 +193,17 @@
             </div>
         </header>
 
-        <!-- VIEW: HOME (Active by default) -->
+        <!-- VIEW: HOME -->
         <div id="view-home" class="tab-view active pt-10">
 
-        <!-- HERO SECTION: The "Sweet" Invitation on a "Bitter" Canvas -->
+        <!-- HERO SECTION -->
         <section class="relative min-h-screen flex items-center justify-center pt-20 pb-20 px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-bitter via-[#0f172a] to-[#1e140a]">
-            <!-- Subtle Radial Gradient for Depth -->
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(45,212,191,0.1),_transparent_40%)] pointer-events-none"></div>
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_rgba(252,211,77,0.08),_transparent_40%)] pointer-events-none"></div>
 
             <div class="max-w-7xl mx-auto w-full">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     
-                    <!-- Copywriter's Masterpiece -->
                     <div class="space-y-8 text-center lg:text-left z-20">
                         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 text-sweet text-xs font-bold tracking-widest uppercase animate-float backdrop-blur-sm">
                             <i class="fa-solid fa-star text-sweet/80"></i>
@@ -225,30 +235,25 @@
                                 Explore Recipes
                                 <i class="fa-solid fa-arrow-right ml-3"></i>
                             </a>
-                            <a href="#community-section" class="btn-gourmet w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full text-base font-semibold text-white bg-slate-800/50 border border-slate-700 hover:bg-slate-700/50 backdrop-blur-md">
-                                Join Community
-                            </a>
                         </div>
                     </div>
 
-                    <!-- Visual Plate (Hero Image) -->
-                    <div class="relative z-20 mx-auto w-full max-w-md lg:max-w-lg">
+                    <div class="relative z-20 mx-auto w-full max-w-md lg:max-w-lg cursor-pointer" onclick="openModal('hero-salad')">
                         <div class="absolute -inset-1 bg-gradient-to-tr from-mint to-sweet rounded-[2.5rem] blur-xl opacity-20 animate-pulse"></div>
                         
-                        <div class="relative rounded-[2rem] overflow-hidden glass-panel p-2 shadow-2xl">
+                        <div class="relative rounded-[2rem] overflow-hidden glass-panel p-2 shadow-2xl group">
                             <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1000&q=80" 
                                  alt="Gourmet Bowl" 
-                                 class="w-full h-[400px] sm:h-[500px] object-cover rounded-[1.5rem] transition-transform duration-700 hover:scale-105"
+                                 class="w-full h-[400px] sm:h-[500px] object-cover rounded-[1.5rem] transition-transform duration-700 group-hover:scale-105"
                                  loading="eager">
 
-                            <!-- Floating Callout -->
                             <div class="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-bitter/80 backdrop-blur-md border border-slate-700/50 text-white flex items-center justify-between shadow-xl">
                                 <div>
                                     <p class="text-[10px] text-mint uppercase tracking-widest font-bold mb-1">Featured Recipe</p>
-                                    <p class="text-sm font-serif font-semibold">Seasonal Grain & Herb Salad</p>
+                                    <p class="text-sm font-serif font-semibold group-hover:text-sweet transition-colors">Seasonal Grain & Herb Salad</p>
                                 </div>
                                 <div class="flex items-center gap-1 px-3 py-1 rounded-full bg-sweet/10 border border-sweet/20 text-sweet text-xs font-bold">
-                                    <i class="fa-solid fa-star"></i> 4.9
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                 </div>
                             </div>
                         </div>
@@ -258,231 +263,100 @@
             </div>
         </section>
 
-        <!-- SECTION 1: DISCOVER CATEGORIES (The "Sweet" Bright Section) -->
+        <!-- SECTION 1: DISCOVER CATEGORIES -->
         <section id="recipes-section" class="py-24 px-6 lg:px-8 bg-slate-50 text-slate-900 relative z-20 rounded-t-[3rem] -mt-8 shadow-[0_-20px_40px_rgba(0,0,0,0.2)]">
             <div class="max-w-7xl mx-auto">
-                
                 <div class="text-center max-w-2xl mx-auto mb-16">
                     <span class="text-mint font-bold uppercase tracking-widest text-sm">Curated Collections</span>
                     <h2 class="text-4xl sm:text-5xl font-serif font-bold text-slate-900 mt-4 mb-6">
                         A World of Flavours
                     </h2>
-                    <p class="text-lg text-slate-600 font-light leading-relaxed">
-                        There's always something exciting cooking. Explore our carefully curated food collections and find inspiration for every craving.
-                    </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    
-                    <!-- Card 1 -->
-                    <div class="glass-panel-light rounded-2xl p-8 group">
+                    <div class="glass-panel-light rounded-2xl p-8 group cursor-pointer" onclick="switchTab('view-everyday')">
                         <div class="w-14 h-14 rounded-full bg-teal-50 text-mint flex items-center justify-center text-xl mb-6 group-hover:bg-mint group-hover:text-white transition-colors duration-300">
                             <i class="fa-solid fa-utensils"></i>
                         </div>
-                        <h3 class="text-2xl font-serif font-bold text-slate-900 mb-3 group-hover:text-mint transition-colors">
-                            Everyday Recipes
-                        </h3>
-                        <p class="text-slate-500 text-sm leading-relaxed mb-6 font-light">
-                            Delicious meals without spending hours in the kitchen. Simple, easy-to-follow recipes made with everyday ingredients.
-                        </p>
-                        <button onclick="switchTab('view-everyday')" class="text-mint font-semibold text-sm hover:text-teal-700 flex items-center transition-colors">
-                            Browse Meals <i class="fa-solid fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1"></i>
-                        </button>
+                        <h3 class="text-2xl font-serif font-bold text-slate-900 mb-3 group-hover:text-mint transition-colors">Everyday Recipes</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6 font-light">Delicious meals without spending hours in the kitchen. Simple, easy-to-follow recipes.</p>
                     </div>
 
-                    <!-- Card 2 -->
-                    <div class="glass-panel-light rounded-2xl p-8 group">
+                    <div class="glass-panel-light rounded-2xl p-8 group cursor-pointer" onclick="switchTab('view-sweets')">
                         <div class="w-14 h-14 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-xl mb-6 group-hover:bg-amber-500 group-hover:text-white transition-colors duration-300">
                             <i class="fa-solid fa-cookie-bite"></i>
                         </div>
-                        <h3 class="text-2xl font-serif font-bold text-slate-900 mb-3 group-hover:text-amber-500 transition-colors">
-                            Sweet Treats
-                        </h3>
-                        <p class="text-slate-500 text-sm leading-relaxed mb-6 font-light">
-                            Because life is sweeter with dessert! Explore delightful cakes, cookies, and homemade treats for special moments.
-                        </p>
-                        <button onclick="switchTab('view-sweets')" class="text-amber-500 font-semibold text-sm hover:text-amber-700 flex items-center transition-colors">
-                            Explore Desserts <i class="fa-solid fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1"></i>
-                        </button>
+                        <h3 class="text-2xl font-serif font-bold text-slate-900 mb-3 group-hover:text-amber-500 transition-colors">Sweet Treats</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6 font-light">Explore delightful cakes, cookies, and homemade treats for special moments.</p>
                     </div>
 
-                    <!-- Card 3 -->
-                    <div class="glass-panel-light rounded-2xl p-8 group">
+                    <div class="glass-panel-light rounded-2xl p-8 group cursor-pointer" onclick="switchTab('view-healthy')">
                         <div class="w-14 h-14 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center text-xl mb-6 group-hover:bg-rose-500 group-hover:text-white transition-colors duration-300">
                             <i class="fa-solid fa-seedling"></i>
                         </div>
-                        <h3 class="text-2xl font-serif font-bold text-slate-900 mb-3 group-hover:text-rose-500 transition-colors">
-                            Healthy Eating
-                        </h3>
-                        <p class="text-slate-500 text-sm leading-relaxed mb-6 font-light">
-                            Enjoy colourful, nourishing meals with our collection of fresh salads, wholesome recipes, and balanced food ideas.
-                        </p>
-                        <button onclick="switchTab('view-healthy')" class="text-rose-500 font-semibold text-sm hover:text-rose-700 flex items-center transition-colors">
-                            Discover Bowls <i class="fa-solid fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1"></i>
-                        </button>
+                        <h3 class="text-2xl font-serif font-bold text-slate-900 mb-3 group-hover:text-rose-500 transition-colors">Healthy Eating</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6 font-light">Enjoy colourful, nourishing meals with fresh salads, and balanced food ideas.</p>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 2: PHILOSOPHY (The "Bitter" High-Contrast Middle) -->
-        <section class="py-24 px-6 lg:px-8 bg-bitter text-white relative z-20 overflow-hidden">
-            <!-- Background accent -->
-            <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-mint/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
-
-            <div class="max-w-7xl mx-auto relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    
-                    <div class="order-2 lg:order-1 relative">
-                        <div class="grid grid-cols-2 gap-4">
-                            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=600&q=80" alt="Cooking" class="rounded-2xl shadow-2xl object-cover h-72 w-full hover:-translate-y-2 transition-transform duration-500">
-                            <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=600&q=80" alt="Feast" class="rounded-2xl shadow-2xl object-cover h-72 w-full mt-12 hover:-translate-y-2 transition-transform duration-500">
-                        </div>
-                    </div>
-
-                    <div class="order-1 lg:order-2 space-y-6">
-                        <span class="text-mint font-bold uppercase tracking-widest text-sm">Philosophy</span>
-                        <h2 class="text-4xl sm:text-5xl font-serif font-bold text-white">
-                            Good Food.<br>Great Memories.
-                        </h2>
-                        
-                        <blockquote class="text-2xl font-serif italic text-sweet border-l-2 border-sweet pl-6 py-2">
-                            "Sometimes, the simplest ingredients create the most memorable meals."
-                        </blockquote>
-
-                        <div class="text-slate-400 space-y-4 text-base font-light leading-relaxed">
-                            <p>
-                                At The Hungry Palette, we believe great food doesn't have to be complicated. Our goal is to make cooking enjoyable and inspire creativity in the kitchen.
-                            </p>
-                            <p>
-                                Whether you're experimenting with a new dish or preparing a familiar family favourite, every recipe is an opportunity to create something wonderful.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- LATEST RECIPES GRID -->
-        <section id="latest-recipes" class="py-24 px-6 lg:px-8 bg-[#0a0f18] text-white relative z-20">
+        <!-- LATEST RECIPES GRID (HOME) -->
+        <section id="latest-recipes" class="py-24 px-6 lg:px-8 bg-[#0a0f18] text-white relative z-20 border-t border-white/5">
             <div class="max-w-7xl mx-auto">
-                
                 <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-white/5 pb-8">
                     <div>
                         <span class="text-sweet font-bold uppercase tracking-widest text-sm">Latest Additions</span>
-                        <h2 class="text-4xl sm:text-5xl font-serif font-bold text-white mt-4">
-                            Fresh From The Oven
-                        </h2>
+                        <h2 class="text-4xl sm:text-5xl font-serif font-bold text-white mt-4">Fresh From The Oven</h2>
                     </div>
-                    <a href="#" class="mt-6 md:mt-0 text-slate-400 hover:text-white transition-colors flex items-center font-medium text-sm">
-                        View All Recipes <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </a>
                 </div>
 
-                <!-- Sleek Image Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    
-                    <!-- Article 1 -->
-                    <a href="#" class="glass-panel rounded-2xl overflow-hidden flex flex-col group cursor-pointer block">
+                    <a href="#" onclick="openModal('easy-10'); return false;" class="glass-panel rounded-2xl overflow-hidden flex flex-col group cursor-pointer block">
                         <div class="relative h-56 overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" alt="Recipe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                             <div class="absolute inset-0 bg-gradient-to-t from-bitter via-transparent to-transparent opacity-80"></div>
-                            <span class="absolute top-4 left-4 px-3 py-1 bg-bitter/60 backdrop-blur-md rounded-full text-xs font-semibold text-mint border border-mint/20">Easy</span>
                         </div>
                         <div class="p-5 flex-1 flex flex-col">
-                            <h3 class="text-lg font-serif font-bold text-white mb-2 group-hover:text-mint transition-colors line-clamp-2">
-                                10 Easy Homemade Recipes for Beginners
-                            </h3>
-                            <p class="text-slate-400 text-xs line-clamp-2 mt-auto font-light">Simple step-by-step guides to kickstart your culinary journey.</p>
+                            <h3 class="text-lg font-serif font-bold text-white mb-2 group-hover:text-mint transition-colors">10 Easy Homemade Recipes</h3>
+                            <p class="text-slate-400 text-xs mt-auto font-light">Simple guides to kickstart your culinary journey.</p>
                         </div>
                     </a>
 
-                    <!-- Article 2 -->
-                    <a href="#" class="glass-panel rounded-2xl overflow-hidden flex flex-col group cursor-pointer block">
+                    <a href="#" onclick="openModal('breakfast-quick'); return false;" class="glass-panel rounded-2xl overflow-hidden flex flex-col group cursor-pointer block">
                         <div class="relative h-56 overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=600&q=80" alt="Recipe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                             <div class="absolute inset-0 bg-gradient-to-t from-bitter via-transparent to-transparent opacity-80"></div>
-                            <span class="absolute top-4 left-4 px-3 py-1 bg-bitter/60 backdrop-blur-md rounded-full text-xs font-semibold text-sweet border border-sweet/20">Breakfast</span>
                         </div>
                         <div class="p-5 flex-1 flex flex-col">
-                            <h3 class="text-lg font-serif font-bold text-white mb-2 group-hover:text-sweet transition-colors line-clamp-2">
-                                Quick Breakfast Ideas for Busy Mornings
-                            </h3>
-                            <p class="text-slate-400 text-xs line-clamp-2 mt-auto font-light">Nutritious, energizing breakfasts prepared in under 15 minutes.</p>
+                            <h3 class="text-lg font-serif font-bold text-white mb-2 group-hover:text-sweet transition-colors">Quick Breakfast Ideas</h3>
+                            <p class="text-slate-400 text-xs mt-auto font-light">Energizing breakfasts prepared in under 15 minutes.</p>
                         </div>
                     </a>
 
-                    <!-- Article 3 -->
-                    <a href="#" class="glass-panel rounded-2xl overflow-hidden flex flex-col group cursor-pointer block">
+                    <a href="#" onclick="openModal('dessert-cake'); return false;" class="glass-panel rounded-2xl overflow-hidden flex flex-col group cursor-pointer block">
                         <div class="relative h-56 overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Recipe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                             <div class="absolute inset-0 bg-gradient-to-t from-bitter via-transparent to-transparent opacity-80"></div>
-                            <span class="absolute top-4 left-4 px-3 py-1 bg-bitter/60 backdrop-blur-md rounded-full text-xs font-semibold text-rose-400 border border-rose-400/20">Desserts</span>
                         </div>
                         <div class="p-5 flex-1 flex flex-col">
-                            <h3 class="text-lg font-serif font-bold text-white mb-2 group-hover:text-rose-400 transition-colors line-clamp-2">
-                                Delicious Homemade Desserts You Must Try
-                            </h3>
-                            <p class="text-slate-400 text-xs line-clamp-2 mt-auto font-light">From rich chocolate cakes to fruit tarts that impress everyone.</p>
+                            <h3 class="text-lg font-serif font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">Ultimate Chocolate Cake</h3>
+                            <p class="text-slate-400 text-xs mt-auto font-light">Rich, moist, and deeply chocolatey for everyone.</p>
                         </div>
                     </a>
 
-                    <!-- Article 4 -->
-                    <a href="#" class="glass-panel rounded-2xl overflow-hidden flex flex-col group cursor-pointer block">
+                    <a href="#" onclick="openModal('dinner-pan'); return false;" class="glass-panel rounded-2xl overflow-hidden flex flex-col group cursor-pointer block">
                         <div class="relative h-56 overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" alt="Recipe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                             <div class="absolute inset-0 bg-gradient-to-t from-bitter via-transparent to-transparent opacity-80"></div>
-                            <span class="absolute top-4 left-4 px-3 py-1 bg-bitter/60 backdrop-blur-md rounded-full text-xs font-semibold text-mint border border-mint/20">Dinner</span>
                         </div>
                         <div class="p-5 flex-1 flex flex-col">
-                            <h3 class="text-lg font-serif font-bold text-white mb-2 group-hover:text-mint transition-colors line-clamp-2">
-                                Easy Dinner Recipes for the Whole Family
-                            </h3>
-                            <p class="text-slate-400 text-xs line-clamp-2 mt-auto font-light">Hearty, comforting, family-tested evening meals.</p>
+                            <h3 class="text-lg font-serif font-bold text-white mb-2 group-hover:text-mint transition-colors">One-Pan Family Dinners</h3>
+                            <p class="text-slate-400 text-xs mt-auto font-light">Hearty, comforting meals saving you from dishes.</p>
                         </div>
                     </a>
-
                 </div>
             </div>
-        </section>
-
-        <!-- SECTION 4: COMMUNITY CTA -->
-        <section id="community-section" class="py-24 px-6 lg:px-8 bg-gradient-to-b from-[#0a0f18] to-bitter text-white relative z-20 text-center">
-            <div class="max-w-3xl mx-auto glass-panel p-10 sm:p-16 rounded-[2.5rem] relative overflow-hidden">
-                <!-- Inner glow -->
-                <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(252,211,77,0.1),_transparent_60%)] pointer-events-none"></div>
-
-                <i class="fa-solid fa-envelope-open-text text-4xl text-sweet mb-6 animate-float"></i>
-                
-                <h2 class="text-3xl sm:text-5xl font-serif font-bold mb-6">
-                    Join the Community
-                </h2>
-
-                <p class="text-slate-300 text-lg mb-10 font-light leading-relaxed max-w-xl mx-auto">
-                    Stay connected with fresh food inspiration, exciting recipes, and kitchen stories delivered right to your inbox.
-                </p>
-
-                <!-- Newsletter Form -->
-                <form onsubmit="event.preventDefault(); showSuccess();" class="max-w-md mx-auto relative z-10">
-                    <div class="flex flex-col sm:flex-row gap-3">
-                        <input type="email" required placeholder="Enter your email address..." class="flex-1 px-6 py-4 rounded-full bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sweet transition-colors">
-                        <button type="submit" class="btn-gourmet px-8 py-4 rounded-full bg-sweet text-bitter font-bold hover:bg-amber-400 transition-colors whitespace-nowrap">
-                            Subscribe
-                        </button>
-                    </div>
-                    <p id="sub-msg" class="text-mint text-sm mt-4 hidden font-medium transition-opacity">
-                        🎉 Welcome to the palette! Check your inbox soon.
-                    </p>
-                </form>
-            </div>
-            
-            <footer class="mt-20 pt-8 border-t border-white/5 text-center">
-                <p class="font-serif italic text-slate-500">
-                    The Hungry Palette &mdash; Est. 2024
-                </p>
-            </footer>
         </section>
 
         </div> <!-- END OF VIEW: HOME -->
@@ -490,356 +364,424 @@
         <!-- VIEW: EVERYDAY RECIPES -->
         <div id="view-everyday" class="tab-view pt-32 pb-24 px-6 lg:px-8 max-w-7xl mx-auto text-white">
             <div class="mb-12 border-b border-white/10 pb-8">
-                <span class="text-mint font-bold uppercase tracking-widest text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-utensils"></i> Collection
-                </span>
                 <h2 class="text-4xl sm:text-6xl font-serif font-bold text-white mt-4">Everyday Recipes</h2>
-                <p class="text-slate-400 mt-4 max-w-2xl font-light text-lg">Your go-to repository for quick, stress-free meals that don't compromise on flavour. Perfect for busy weeknights and relaxed family dinners.</p>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <a href="#" class="glass-panel rounded-3xl overflow-hidden flex flex-col group cursor-pointer block">
+                <a href="#" onclick="openModal('easy-10'); return false;" class="glass-panel rounded-3xl overflow-hidden flex flex-col group cursor-pointer block">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" alt="Recipe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        <span class="absolute top-4 left-4 px-4 py-1 bg-bitter/80 backdrop-blur-md rounded-full text-xs font-semibold text-mint border border-mint/20">Beginner Friendly</span>
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="p-6 flex-1 flex flex-col">
                         <h3 class="text-xl font-serif font-bold text-white mb-3 group-hover:text-mint transition-colors">10 Easy Homemade Recipes</h3>
-                        <p class="text-slate-400 text-sm mb-4 font-light">Simple step-by-step guides to kickstart your culinary journey using pantry staples.</p>
-                        <div class="mt-auto flex justify-between items-center text-xs text-mint">
-                            <span><i class="fa-regular fa-clock mr-1"></i> 20 mins</span>
-                            <span class="font-bold">Read Recipe <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
                     </div>
                 </a>
-
-                <a href="#" class="glass-panel rounded-3xl overflow-hidden flex flex-col group cursor-pointer block">
+                <a href="#" onclick="openModal('breakfast-quick'); return false;" class="glass-panel rounded-3xl overflow-hidden flex flex-col group cursor-pointer block">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=600&q=80" alt="Recipe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        <span class="absolute top-4 left-4 px-4 py-1 bg-bitter/80 backdrop-blur-md rounded-full text-xs font-semibold text-mint border border-mint/20">Breakfast</span>
+                        <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="p-6 flex-1 flex flex-col">
                         <h3 class="text-xl font-serif font-bold text-white mb-3 group-hover:text-mint transition-colors">Quick Breakfast Ideas</h3>
-                        <p class="text-slate-400 text-sm mb-4 font-light">Nutritious, energizing breakfasts prepared in under 15 minutes for busy mornings.</p>
-                        <div class="mt-auto flex justify-between items-center text-xs text-mint">
-                            <span><i class="fa-regular fa-clock mr-1"></i> 10 mins</span>
-                            <span class="font-bold">Read Recipe <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
                     </div>
                 </a>
-
-                <a href="#" class="glass-panel rounded-3xl overflow-hidden flex flex-col group cursor-pointer block">
+                <a href="#" onclick="openModal('dinner-pan'); return false;" class="glass-panel rounded-3xl overflow-hidden flex flex-col group cursor-pointer block">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" alt="Recipe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        <span class="absolute top-4 left-4 px-4 py-1 bg-bitter/80 backdrop-blur-md rounded-full text-xs font-semibold text-mint border border-mint/20">Dinner</span>
+                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="p-6 flex-1 flex flex-col">
                         <h3 class="text-xl font-serif font-bold text-white mb-3 group-hover:text-mint transition-colors">One-Pan Family Dinners</h3>
-                        <p class="text-slate-400 text-sm mb-4 font-light">Hearty, comforting, family-tested evening meals that save you from washing piles of dishes.</p>
-                        <div class="mt-auto flex justify-between items-center text-xs text-mint">
-                            <span><i class="fa-regular fa-clock mr-1"></i> 35 mins</span>
-                            <span class="font-bold">Read Recipe <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
                     </div>
                 </a>
             </div>
-        </div> <!-- END OF VIEW: EVERYDAY -->
+        </div> 
 
         <!-- VIEW: SWEET TREATS -->
         <div id="view-sweets" class="tab-view pt-32 pb-24 px-6 lg:px-8 max-w-7xl mx-auto text-white">
             <div class="mb-12 border-b border-white/10 pb-8">
-                <span class="text-amber-400 font-bold uppercase tracking-widest text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-cookie-bite"></i> Collection
-                </span>
                 <h2 class="text-4xl sm:text-6xl font-serif font-bold text-white mt-4">Sweet Treats</h2>
-                <p class="text-slate-400 mt-4 max-w-2xl font-light text-lg">Indulge your sweet tooth with our ultimate dessert guide. From decadent chocolate cakes to delicate pastries, life is just better with dessert.</p>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <a href="#" class="glass-panel rounded-3xl overflow-hidden flex flex-col group cursor-pointer block border-amber-900/30 hover:border-amber-500/50">
+                <a href="#" onclick="openModal('dessert-cake'); return false;" class="glass-panel rounded-3xl overflow-hidden flex flex-col group cursor-pointer block">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Dessert" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        <span class="absolute top-4 left-4 px-4 py-1 bg-bitter/80 backdrop-blur-md rounded-full text-xs font-semibold text-amber-400 border border-amber-400/20">Baking</span>
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="p-6 flex-1 flex flex-col">
                         <h3 class="text-xl font-serif font-bold text-white mb-3 group-hover:text-amber-400 transition-colors">Ultimate Chocolate Cake</h3>
-                        <p class="text-slate-400 text-sm mb-4 font-light">Rich, moist, and deeply chocolatey. The only chocolate cake recipe you will ever need.</p>
-                        <div class="mt-auto flex justify-between items-center text-xs text-amber-400">
-                            <span><i class="fa-regular fa-clock mr-1"></i> 60 mins</span>
-                            <span class="font-bold">Read Recipe <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
                     </div>
                 </a>
-
-                <a href="#" class="glass-panel rounded-3xl overflow-hidden flex flex-col group cursor-pointer block border-amber-900/30 hover:border-amber-500/50">
+                <a href="#" onclick="openModal('panna-cotta'); return false;" class="glass-panel rounded-3xl overflow-hidden flex flex-col group cursor-pointer block">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80" alt="Dessert" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        <span class="absolute top-4 left-4 px-4 py-1 bg-bitter/80 backdrop-blur-md rounded-full text-xs font-semibold text-amber-400 border border-amber-400/20">No-Bake</span>
+                        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="p-6 flex-1 flex flex-col">
                         <h3 class="text-xl font-serif font-bold text-white mb-3 group-hover:text-amber-400 transition-colors">Classic Vanilla Panna Cotta</h3>
-                        <p class="text-slate-400 text-sm mb-4 font-light">A silky, smooth Italian classic topped with fresh seasonal berry compote.</p>
-                        <div class="mt-auto flex justify-between items-center text-xs text-amber-400">
-                            <span><i class="fa-regular fa-clock mr-1"></i> 15 mins prep</span>
-                            <span class="font-bold">Read Recipe <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
                     </div>
                 </a>
             </div>
-        </div> <!-- END OF VIEW: SWEETS -->
+        </div>
 
         <!-- VIEW: HEALTHY EATING -->
         <div id="view-healthy" class="tab-view pt-32 pb-24 px-6 lg:px-8 max-w-7xl mx-auto text-white">
             <div class="mb-12 border-b border-white/10 pb-8">
-                <span class="text-rose-400 font-bold uppercase tracking-widest text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-seedling"></i> Collection
-                </span>
                 <h2 class="text-4xl sm:text-6xl font-serif font-bold text-white mt-4">Healthy Eating</h2>
-                <p class="text-slate-400 mt-4 max-w-2xl font-light text-lg">Fuel your body with vibrant, nutrient-dense recipes that don't skimp on flavor. Discover salads, bowls, and smoothies to energize your day.</p>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <a href="#" class="glass-panel rounded-3xl overflow-hidden flex flex-col group cursor-pointer block border-rose-900/30 hover:border-rose-500/50">
+                <a href="#" onclick="openModal('hero-salad'); return false;" class="glass-panel rounded-3xl overflow-hidden flex flex-col group cursor-pointer block">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80" alt="Healthy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        <span class="absolute top-4 left-4 px-4 py-1 bg-bitter/80 backdrop-blur-md rounded-full text-xs font-semibold text-rose-400 border border-rose-400/20">Salads</span>
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="p-6 flex-1 flex flex-col">
                         <h3 class="text-xl font-serif font-bold text-white mb-3 group-hover:text-rose-400 transition-colors">Seasonal Grain & Herb Salad</h3>
-                        <p class="text-slate-400 text-sm mb-4 font-light">Packed with quinoa, fresh herbs, toasted nuts, and a zesty lemon vinaigrette.</p>
-                        <div class="mt-auto flex justify-between items-center text-xs text-rose-400">
-                            <span><i class="fa-regular fa-clock mr-1"></i> 20 mins</span>
-                            <span class="font-bold">Read Recipe <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
                     </div>
                 </a>
-
-                <a href="#" class="glass-panel rounded-3xl overflow-hidden flex flex-col group cursor-pointer block border-rose-900/30 hover:border-rose-500/50">
+                <a href="#" onclick="openModal('energy-bites'); return false;" class="glass-panel rounded-3xl overflow-hidden flex flex-col group cursor-pointer block">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1621996346565-e3d5d6281313?auto=format&fit=crop&w=600&q=80" alt="Healthy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        <span class="absolute top-4 left-4 px-4 py-1 bg-bitter/80 backdrop-blur-md rounded-full text-xs font-semibold text-rose-400 border border-rose-400/20">Snacks</span>
+                        <img src="https://images.unsplash.com/photo-1621996346565-e3d5d6281313?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="p-6 flex-1 flex flex-col">
                         <h3 class="text-xl font-serif font-bold text-white mb-3 group-hover:text-rose-400 transition-colors">Guilt-Free Energy Bites</h3>
-                        <p class="text-slate-400 text-sm mb-4 font-light">No-bake oat and peanut butter bites packed with chia seeds and dark chocolate.</p>
-                        <div class="mt-auto flex justify-between items-center text-xs text-rose-400">
-                            <span><i class="fa-regular fa-clock mr-1"></i> 10 mins</span>
-                            <span class="font-bold">Read Recipe <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
                     </div>
                 </a>
             </div>
-        </div> <!-- END OF VIEW: HEALTHY -->
+        </div>
 
     </div>
 
-    <!-- Scripting for 3D Background & UI -->
-    <script>
-        // Tab Switching Logic
-        function switchTab(tabId) {
-            // Hide all tab views
-            document.querySelectorAll('.tab-view').forEach(el => {
-                el.classList.remove('active');
-            });
+    <!-- DYNAMIC RECIPE MODAL (Hidden by default) -->
+    <div id="recipe-modal" class="fixed inset-0 z-[100] hidden-modal flex items-center justify-center p-4 sm:p-6">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
+        
+        <!-- Modal Content Container -->
+        <div id="modal-content" class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-bitter border border-slate-700 rounded-3xl shadow-2xl flex flex-col">
             
-            // Show requested tab view
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-sweet hover:text-bitter transition-colors backdrop-blur-md">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Dynamic Image -->
+            <div class="relative w-full h-64 sm:h-80 shrink-0">
+                <img id="mod-img" src="" alt="Recipe" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-bitter to-transparent"></div>
+                
+                <!-- Marketing Gimmick Tag -->
+                <div class="absolute bottom-4 left-6 right-6 flex items-start">
+                    <div id="mod-marketing" class="px-4 py-1.5 rounded-full bg-sweet text-bitter text-xs sm:text-sm font-bold shadow-lg shadow-sweet/20 flex items-center gap-2">
+                        <i class="fa-solid fa-fire-flame-curved"></i> <span>Trending Now!</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="p-6 sm:p-8 flex-1">
+                <h2 id="mod-title" class="text-3xl sm:text-4xl font-serif font-bold text-white mb-4">Recipe Title</h2>
+                
+                <p id="mod-desc" class="text-slate-400 font-light text-base sm:text-lg mb-6 leading-relaxed">
+                    Description goes here.
+                </p>
+
+                <!-- Nutrition & Info Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-slate-900/80 rounded-xl p-3 border border-slate-800 text-center">
+                        <p class="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Calories</p>
+                        <p id="mod-cal" class="text-lg font-bold text-mint">350</p>
+                    </div>
+                    <div class="bg-slate-900/80 rounded-xl p-3 border border-slate-800 text-center">
+                        <p class="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Time</p>
+                        <p id="mod-time" class="text-lg font-bold text-white">20 m</p>
+                    </div>
+                    <div class="bg-slate-900/80 rounded-xl p-3 border border-slate-800 text-center">
+                        <p class="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Protein</p>
+                        <p id="mod-pro" class="text-lg font-bold text-white">12g</p>
+                    </div>
+                    <div class="bg-slate-900/80 rounded-xl p-3 border border-slate-800 text-center">
+                        <p class="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Carbs</p>
+                        <p id="mod-carb" class="text-lg font-bold text-white">45g</p>
+                    </div>
+                </div>
+
+                <!-- Recipe Instructions -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-serif font-bold text-sweet mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-sm"></i> Instructions
+                    </h3>
+                    <div id="mod-recipe" class="text-slate-300 font-light space-y-3 pl-4 border-l-2 border-slate-800 text-sm sm:text-base">
+                        <!-- Dynamic Steps injected here -->
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <button class="w-full btn-gourmet py-4 rounded-xl bg-mint text-bitter font-bold text-lg hover:bg-teal-300 transition-colors">
+                    <i class="fa-regular fa-bookmark mr-2"></i> Save to My Cookbook
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripting for UI & Database -->
+    <script>
+        // --- 1. MOCK DATABASE FOR RECIPES ---
+        const recipeDatabase = {
+            'hero-salad': {
+                title: 'Seasonal Grain & Herb Salad',
+                img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1000&q=80',
+                marketing: '🔥 Loved by 3,400+ Home Cooks this Summer!',
+                desc: 'A vibrant, nutrient-dense bowl packed with quinoa, fresh herbs, toasted nuts, and a zesty lemon vinaigrette. Perfect for a refreshing lunch or a light dinner.',
+                cal: '320 kcal', time: '15 mins', pro: '14g', carb: '40g',
+                recipe: [
+                    'Rinse and cook the quinoa according to package instructions. Let it cool.',
+                    'Chop fresh parsley, mint, and cherry tomatoes.',
+                    'Whisk together olive oil, lemon juice, salt, and black pepper for the dressing.',
+                    'Toss the quinoa, herbs, and dressing together in a large bowl.',
+                    'Top with toasted almonds and serve chilled!'
+                ]
+            },
+            'easy-10': {
+                title: '10 Easy Homemade Recipes',
+                img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1000&q=80',
+                marketing: '⭐ #1 Most Saved Collection This Week!',
+                desc: 'Stop overthinking dinner. These simple step-by-step guides will kickstart your culinary journey using ingredients you probably already have in your pantry.',
+                cal: 'Varies', time: '20 mins', pro: 'Avg 15g', carb: 'Avg 30g',
+                recipe: [
+                    'Review your pantry for staple ingredients (rice, beans, pasta, eggs).',
+                    'Choose one of our 10 base flavor profiles.',
+                    'Sauté your base aromatics (onion, garlic) in olive oil.',
+                    'Add your main protein and carbs, stirring frequently.',
+                    'Garnish with fresh herbs and a squeeze of citrus.'
+                ]
+            },
+            'breakfast-quick': {
+                title: 'Quick Breakfast Ideas',
+                img: 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=1000&q=80',
+                marketing: '⚡ Boost Your Morning Energy Instantly!',
+                desc: 'Nutritious, energizing breakfasts prepared in under 15 minutes. From avocado toast variations to loaded smoothie bowls.',
+                cal: '410 kcal', time: '10 mins', pro: '18g', carb: '45g',
+                recipe: [
+                    'Toast thick slices of sourdough bread until golden.',
+                    'Mash half an avocado with a pinch of sea salt and red pepper flakes.',
+                    'Spread generously over the toast.',
+                    'Top with a perfectly poached egg or cherry tomatoes.',
+                    'Drizzle with a tiny bit of balsamic glaze.'
+                ]
+            },
+            'dessert-cake': {
+                title: 'Ultimate Chocolate Cake',
+                img: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=80',
+                marketing: '🍫 Warning: Highly Addictive!',
+                desc: 'Rich, moist, and deeply chocolatey. This is the only chocolate cake recipe you will ever need, complete with a silky ganache frosting.',
+                cal: '580 kcal', time: '60 mins', pro: '6g', carb: '72g',
+                recipe: [
+                    'Preheat oven to 350°F (175°C) and grease two 8-inch round cake pans.',
+                    'Mix dry ingredients: flour, sugar, cocoa powder, baking soda, and salt.',
+                    'Add wet ingredients: eggs, buttermilk, warm water, and oil. Mix until smooth.',
+                    'Pour batter into pans and bake for 30-35 minutes.',
+                    'Let cool completely before frosting with homemade chocolate ganache.'
+                ]
+            },
+            'dinner-pan': {
+                title: 'One-Pan Family Dinners',
+                img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80',
+                marketing: '🧼 Zero Dish-Washing Stress!',
+                desc: 'Hearty, comforting, family-tested evening meals that save you from washing piles of dishes. Just toss, roast, and enjoy.',
+                cal: '450 kcal', time: '35 mins', pro: '35g', carb: '25g',
+                recipe: [
+                    'Preheat oven to 400°F (200°C).',
+                    'Chop potatoes, carrots, and chicken breast into even chunks.',
+                    'Toss all ingredients on a large sheet pan with olive oil, garlic, and rosemary.',
+                    'Roast for 25-30 minutes until chicken is cooked through and veggies are tender.',
+                    'Serve directly from the pan!'
+                ]
+            },
+            'panna-cotta': {
+                title: 'Classic Vanilla Panna Cotta',
+                img: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=1000&q=80',
+                marketing: '✨ Restaurant Quality at Home',
+                desc: 'A silky, smooth Italian classic topped with fresh seasonal berry compote. Looks incredibly fancy, but takes only 15 minutes of prep.',
+                cal: '310 kcal', time: '15 mins', pro: '4g', carb: '22g',
+                recipe: [
+                    'Bloom gelatin in cold water for 5 minutes.',
+                    'Warm heavy cream, sugar, and a vanilla bean over medium heat (do not boil).',
+                    'Remove from heat and stir in the bloomed gelatin until dissolved.',
+                    'Pour into ramekins and refrigerate for at least 4 hours to set.',
+                    'Top with warmed berry jam before serving.'
+                ]
+            },
+            'energy-bites': {
+                title: 'Guilt-Free Energy Bites',
+                img: 'https://images.unsplash.com/photo-1621996346565-e3d5d6281313?auto=format&fit=crop&w=1000&q=80',
+                marketing: '🌱 Perfect Pre-Workout Snack!',
+                desc: 'No-bake oat and peanut butter bites packed with chia seeds and dark chocolate. The perfect grab-and-go snack for when cravings hit.',
+                cal: '180 kcal', time: '10 mins', pro: '6g', carb: '20g',
+                recipe: [
+                    'In a large bowl, mix rolled oats, peanut butter, honey, and chia seeds.',
+                    'Fold in dark chocolate chips.',
+                    'Chill the mixture in the fridge for 20 minutes to firm up.',
+                    'Roll into bite-sized balls (about 1 inch thick).',
+                    'Store in an airtight container in the fridge for up to a week.'
+                ]
+            }
+        };
+
+        // --- 2. MODAL LOGIC ---
+        const modal = document.getElementById('recipe-modal');
+        
+        function openModal(id) {
+            const data = recipeDatabase[id];
+            if(!data) return; // Fallback if ID not found
+
+            // Populate Modal Content
+            document.getElementById('mod-img').src = data.img;
+            document.getElementById('mod-title').innerText = data.title;
+            document.getElementById('mod-desc').innerText = data.desc;
+            document.getElementById('mod-marketing').innerHTML = `<i class="fa-solid fa-fire-flame-curved"></i> <span>${data.marketing}</span>`;
+            document.getElementById('mod-cal').innerText = data.cal;
+            document.getElementById('mod-time').innerText = data.time;
+            document.getElementById('mod-pro').innerText = data.pro;
+            document.getElementById('mod-carb').innerText = data.carb;
+
+            // Generate Recipe Steps
+            const recipeContainer = document.getElementById('mod-recipe');
+            recipeContainer.innerHTML = ''; // Clear old
+            data.recipe.forEach((step, index) => {
+                const p = document.createElement('p');
+                p.innerHTML = `<span class="text-mint font-bold mr-2">${index + 1}.</span> ${step}`;
+                recipeContainer.appendChild(p);
+            });
+
+            // Show Modal & Disable body scroll
+            modal.classList.remove('hidden-modal');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden-modal');
+            document.body.style.overflow = 'auto'; // Re-enable scroll
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape' && !modal.classList.contains('hidden-modal')) {
+                closeModal();
+            }
+        });
+
+        // --- 3. TAB SWITCHING LOGIC ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-view').forEach(el => el.classList.remove('active'));
             const target = document.getElementById(tabId);
             if(target) target.classList.add('active');
 
-            // Reset navigation button states
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.className = 'nav-btn text-slate-400 border-b-2 border-transparent pb-1 transition-colors hover:text-white';
             });
             
-            // Highlight the active navigation button with theme colors
             const activeBtn = Array.from(document.querySelectorAll('.nav-btn')).find(btn => btn.getAttribute('onclick') === `switchTab('${tabId}')`);
-            
             if (activeBtn) {
                 if(tabId === 'view-home') activeBtn.className = 'nav-btn text-sweet border-b-2 border-sweet pb-1 transition-colors';
                 if(tabId === 'view-everyday') activeBtn.className = 'nav-btn text-mint border-b-2 border-mint pb-1 transition-colors';
                 if(tabId === 'view-sweets') activeBtn.className = 'nav-btn text-amber-400 border-b-2 border-amber-400 pb-1 transition-colors';
                 if(tabId === 'view-healthy') activeBtn.className = 'nav-btn text-rose-400 border-b-2 border-rose-400 pb-1 transition-colors';
             }
-
-            // Scroll to the top of the newly opened tab smoothly
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // Custom Cursor Logic
+        // --- 4. CURSOR & 3D BACKGROUND ---
         const cursorRing = document.getElementById('cursor-ring');
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-        let ringX = mouseX;
-        let ringY = mouseY;
+        let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2, ringX = mouseX, ringY = mouseY;
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
+        document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
 
-        // Add interactive hover states for the cursor
-        document.querySelectorAll('a, button, input').forEach(el => {
+        document.querySelectorAll('a, button, input, .cursor-pointer').forEach(el => {
             el.addEventListener('mouseenter', () => {
-                cursorRing.style.width = '48px';
-                cursorRing.style.height = '48px';
+                cursorRing.style.width = '48px'; cursorRing.style.height = '48px';
                 cursorRing.style.backgroundColor = 'rgba(252, 211, 77, 0.1)';
             });
             el.addEventListener('mouseleave', () => {
-                cursorRing.style.width = '36px';
-                cursorRing.style.height = '36px';
+                cursorRing.style.width = '36px'; cursorRing.style.height = '36px';
                 cursorRing.style.backgroundColor = 'transparent';
             });
         });
 
         function updateCursor() {
-            ringX += (mouseX - ringX) * 0.2;
-            ringY += (mouseY - ringY) * 0.2;
-            cursorRing.style.left = `${ringX}px`;
-            cursorRing.style.top = `${ringY}px`;
+            ringX += (mouseX - ringX) * 0.2; ringY += (mouseY - ringY) * 0.2;
+            cursorRing.style.left = `${ringX}px`; cursorRing.style.top = `${ringY}px`;
             requestAnimationFrame(updateCursor);
         }
         updateCursor();
 
-        // Form Success Message
-        function showSuccess() {
-            const msg = document.getElementById('sub-msg');
-            const input = document.querySelector('input[type="email"]');
-            msg.classList.remove('hidden');
-            input.value = '';
-            setTimeout(() => msg.classList.add('hidden'), 4000);
-        }
-
-        // ==========================================
-        // Three.js De-cluttered & Elegant Background
-        // ==========================================
+        // 3D Setup
         window.addEventListener('DOMContentLoaded', () => {
             const canvas = document.getElementById('thp-3d-canvas');
             const scene = new THREE.Scene();
-            
-            // Fog to push elements into the background gently
             scene.fog = new THREE.FogExp2(0x0a0a0f, 0.03);
-
             const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
             camera.position.z = 20;
-
             const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-            // Softer Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Reduced intensity
-            scene.add(ambientLight);
-
-            const dirLight = new THREE.DirectionalLight(0xfcd34d, 1.0); // Sweet amber light
+            scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+            const dirLight = new THREE.DirectionalLight(0xfcd34d, 1.0);
             dirLight.position.set(10, 20, 10);
             scene.add(dirLight);
 
-            // Elegant, slightly translucent materials
             const defaultMatOpts = { roughness: 0.3, metalness: 0.1, transparent: true, opacity: 0.85 };
 
             function createStrawberry() {
                 const group = new THREE.Group();
-                const berry = new THREE.Mesh(
-                    new THREE.ConeGeometry(0.4, 0.7, 16),
-                    new THREE.MeshStandardMaterial({ color: 0xbe123c, ...defaultMatOpts }) // Darker red
-                );
+                const berry = new THREE.Mesh(new THREE.ConeGeometry(0.4, 0.7, 16), new THREE.MeshStandardMaterial({ color: 0xbe123c, ...defaultMatOpts }));
                 berry.rotation.x = Math.PI;
-                const leaf = new THREE.Mesh(
-                    new THREE.ConeGeometry(0.3, 0.1, 5),
-                    new THREE.MeshStandardMaterial({ color: 0x065f46, ...defaultMatOpts })
-                );
+                const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.3, 0.1, 5), new THREE.MeshStandardMaterial({ color: 0x065f46, ...defaultMatOpts }));
                 leaf.position.y = 0.35;
-                group.add(berry, leaf);
-                return group;
+                group.add(berry, leaf); return group;
             }
-
             function createCitrus() {
                 const group = new THREE.Group();
-                const slice = new THREE.Mesh(
-                    new THREE.CylinderGeometry(0.5, 0.5, 0.08, 24),
-                    new THREE.MeshStandardMaterial({ color: 0xf59e0b, ...defaultMatOpts })
-                );
-                const rim = new THREE.Mesh(
-                    new THREE.TorusGeometry(0.5, 0.04, 8, 24),
-                    new THREE.MeshStandardMaterial({ color: 0xfde68a, ...defaultMatOpts })
-                );
+                const slice = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.08, 24), new THREE.MeshStandardMaterial({ color: 0xf59e0b, ...defaultMatOpts }));
+                const rim = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.04, 8, 24), new THREE.MeshStandardMaterial({ color: 0xfde68a, ...defaultMatOpts }));
                 rim.rotation.x = Math.PI / 2;
-                group.add(slice, rim);
-                return group;
+                group.add(slice, rim); return group;
             }
-
             function createChoco() {
-                return new THREE.Mesh(
-                    new THREE.BoxGeometry(0.5, 0.5, 0.15),
-                    new THREE.MeshStandardMaterial({ color: 0x291402, ...defaultMatOpts }) // Very dark bitter chocolate
-                );
+                return new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.5, 0.15), new THREE.MeshStandardMaterial({ color: 0x291402, ...defaultMatOpts }));
             }
 
             const builders = [createStrawberry, createCitrus, createChoco];
             const items = [];
-            
-            // Reduced count for less clutter (14 instead of 32)
-            const count = 14; 
-
-            for (let i = 0; i < count; i++) {
+            for (let i = 0; i < 14; i++) {
                 const mesh = builders[i % builders.length]();
-                
-                // Spread wider and deeper to avoid cluttering the center text
-                const x = (Math.random() - 0.5) * 40;
-                const y = (Math.random() - 0.5) * 30;
-                const z = (Math.random() - 0.5) * 15 - 5; // Pushed back
-
+                const x = (Math.random() - 0.5) * 40; const y = (Math.random() - 0.5) * 30; const z = (Math.random() - 0.5) * 15 - 5;
                 mesh.position.set(x, y, z);
                 mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
-                
-                const scale = 0.6 + Math.random() * 0.5; // Slightly smaller
-                mesh.scale.set(scale, scale, scale);
+                const scale = 0.6 + Math.random() * 0.5; mesh.scale.set(scale, scale, scale);
                 scene.add(mesh);
-
-                items.push({
-                    mesh,
-                    baseY: y,
-                    speed: 0.005 + Math.random() * 0.01,
-                    rotX: (Math.random() - 0.5) * 0.01,
-                    rotY: (Math.random() - 0.5) * 0.01,
-                    phase: Math.random() * Math.PI * 2
-                });
+                items.push({ mesh, baseY: y, rotX: (Math.random() - 0.5) * 0.01, rotY: (Math.random() - 0.5) * 0.01, phase: Math.random() * Math.PI * 2 });
             }
 
-            // Mouse parallax for subtle background shifting, NOT aggressive magnetism
-            let targetCamX = 0;
-            let targetCamY = 0;
-
+            let targetCamX = 0, targetCamY = 0;
             window.addEventListener('mousemove', (e) => {
                 targetCamX = (e.clientX / window.innerWidth) * 2 - 1;
                 targetCamY = -(e.clientY / window.innerHeight) * 2 + 1;
             });
-
             window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
+                camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix();
                 renderer.setSize(window.innerWidth, window.innerHeight);
             });
 
             const clock = new THREE.Clock();
-
             function animate() {
                 requestAnimationFrame(animate);
                 const time = clock.getElapsedTime();
-
-                // Gentle, slow floating animation
                 items.forEach(item => {
-                    item.mesh.rotation.x += item.rotX;
-                    item.mesh.rotation.y += item.rotY;
-                    // Slow sine wave vertical bobbing
+                    item.mesh.rotation.x += item.rotX; item.mesh.rotation.y += item.rotY;
                     item.mesh.position.y = item.baseY + Math.sin(time * 0.5 + item.phase) * 1.5;
                 });
-
-                // Subtle camera parallax based on mouse
                 camera.position.x += (targetCamX * 2 - camera.position.x) * 0.02;
                 camera.position.y += (targetCamY * 2 - camera.position.y) * 0.02;
                 camera.lookAt(scene.position);
-
                 renderer.render(scene, camera);
             }
             animate();
